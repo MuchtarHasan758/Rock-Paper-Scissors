@@ -15,7 +15,7 @@ function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
         outputEl.textContent = sum
         messageEl.textContent = "Seri"
-    } else if (sum === "batu-gunting" || sum === "gunting-kertas" || sum === "kertas-batu") {
+    } else if (playerSelection === "rock" && computerSelection === "paper" || playerSelection === "gunting" && computerSelection === "kertas" || playerSelection === "kertas" && computerSelection === "batu") {
         outputEl.textContent = sum
         messageEl.textContent = "Menang"
     } else {
