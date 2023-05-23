@@ -1,27 +1,71 @@
-const rps = ["batu", "kertas", "gunting"]
-const pilihanPemain = prompt("Batu, Kertas, or Gunting (Harus benar-benar ketiknya)")
-const playerSelection = pilihanPemain.toLowerCase();
-const computerSelection = getComputerChoice()
-const messageEl = document.getElementById("output-el")
-const outputEl = document.getElementById("message-el")
+"use strict";
 
-function getComputerChoice() {
-    return rps[Math.floor(Math.random() * rps.length)]
-}
+const rps = ["batu", "kertas", "gunting"];
+const messageEl = document.getElementById("message-el");
+const outputEl = document.getElementById("output-el");
+const submitBtn = document.querySelector("#submit-choice");
+const batuBtn = document.querySelector("#button-batu");
+const kertasBtn = document.querySelector("#button-kertas");
+const guntingBtn = document.querySelector("#button-gunting");
+const allBtn = document.querySelectorAll(".btn");
+const yakin = document.querySelector("#u-sure");
+const waktuEl = document.querySelector("#waktu");
+const playerChoice = [];
+const computerChoice = [];
+const pilihan = ["batu", "kertas", "gunting"];
 
-function playRound(playerSelection, computerSelection) {
-    let sum = "(Kamu) " + playerSelection + " - " + computerSelection + " (Komputer)"
-    console.log(sum);
-    if (playerSelection === computerSelection) {
-        outputEl.textContent = sum
-        messageEl.textContent = "Seri"
-    } else if (playerSelection === "batu" && computerSelection === "gunting" || playerSelection === "gunting" && computerSelection === "kertas" || playerSelection === "kertas" && computerSelection === "batu") {
-        outputEl.textContent = sum
-        messageEl.textContent = "Menang"
-    } else {
-        outputEl.textContent = sum
-        messageEl.textContent = "Coba lagi"
-    }
-}
+const pushPlayerInput = function (push) {
+  outputEl.textContent = ``;
+  playerChoice.length = 0;
+  playerChoice.push(push);
+  yakin.textContent = `Apakah anda yakin memilih ${push.toUpperCase()}`;
+  return Object.values(playerChoice);
+};
 
-console.log(playRound(playerSelection, computerSelection))
+const getRandomChoice = function (player) {
+  player.length = 0;
+  return player.push(rps[Math.floor(Math.random() * rps.length)]);
+};
+
+allBtn.forEach((btn, i) =>
+  btn.addEventListener("click", function () {
+    pushPlayerInput(pilihan[i]);
+    submitBtn.style.display = "flex";
+  })
+);
+
+submitBtn.addEventListener("click", function () {
+  yakin.textContent = "";
+  computerChoice.length = 0;
+  getRandomChoice(computerChoice);
+  const output =
+    playerChoice == "batu" && computerChoice == "gunting"
+      ? "Menang"
+      : playerChoice == "kertas" && computerChoice == "batu"
+      ? "Menang"
+      : playerChoice == "gunting" && computerChoice == "kertas"
+      ? "Menang"
+      : playerChoice[0] === computerChoice[0]
+      ? "Seri"
+      : "Kalah";
+  outputEl.textContent = `Kamu ${playerChoice[0].toUpperCase()} vs ${computerChoice[0].toUpperCase()} Komputer ||||||| ${output}`;
+  submitBtn.style.display = "none";
+});
+
+setInterval(function () {
+  const waktu = new Date();
+  const options = {
+    hour: "numeric",
+    minute: "numeric",
+    day: "numeric",
+    date: "numeric",
+    month: "long",
+    year: "numeric",
+    weekday: "long",
+    second: "numeric",
+  };
+  waktuEl.textContent = new Intl.DateTimeFormat(
+    navigator.language,
+    options
+  ).format(waktu);
+}, 1000);

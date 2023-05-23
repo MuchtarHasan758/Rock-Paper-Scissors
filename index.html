@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>body {
+    <style>
+      body {
         text-align: center;
-    }</style>
-</head>
-<body>
+      }
+      #submit-choice {
+        display: none;
+        margin: auto;
+        background-color: red;
+        color: wheat;
+      }
+      #waktu {
+        text-align: start;
+        margin-left: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="waktu">tes</p>
     <h2 id="message-el">Main Batu Kertas Gunting</h2>
-    <h1 id="output-el">Hasil</h1>
+    <div id="container-btn">
+      <button class="btn" id="button-batu">Batu</button>
+      <button class="btn" id="button-kertas">Kertas</button>
+      <button class="btn" id="button-gunting">Gunting</button>
+    </div>
+    <span id="u-sure"></span>
+    <button id="submit-choice">submit</button>
+    <h1>Hasil</h1>
+    <span id="output-el"></span>
     <script src="./index.js"></script>
-</body>
+  </body>
 </html>
