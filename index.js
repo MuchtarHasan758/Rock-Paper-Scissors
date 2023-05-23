@@ -4,9 +4,6 @@ const rps = ["batu", "kertas", "gunting"];
 const messageEl = document.getElementById("message-el");
 const outputEl = document.getElementById("output-el");
 const submitBtn = document.querySelector("#submit-choice");
-const batuBtn = document.querySelector("#button-batu");
-const kertasBtn = document.querySelector("#button-kertas");
-const guntingBtn = document.querySelector("#button-gunting");
 const allBtn = document.querySelectorAll(".btn");
 const yakin = document.querySelector("#u-sure");
 const waktuEl = document.querySelector("#waktu");
@@ -52,9 +49,10 @@ submitBtn.addEventListener("click", function () {
   submitBtn.style.display = "none";
 });
 
+//Buat waktu yg di update per 1 detik, supaya kita tidak lupa akan waktu
 setInterval(function () {
   const waktu = new Date();
-  const options = {
+  const config = {
     hour: "numeric",
     minute: "numeric",
     day: "numeric",
@@ -66,6 +64,6 @@ setInterval(function () {
   };
   waktuEl.textContent = new Intl.DateTimeFormat(
     navigator.language,
-    options
+    config
   ).format(waktu);
 }, 1000);
